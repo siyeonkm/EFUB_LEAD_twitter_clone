@@ -22,7 +22,7 @@ public class User extends BaseEntity{
     @Column(length = 100, nullable = false)
     private String nickname;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100, nullable = false, unique = true)
     private String twitter_id;
 
     @Column(columnDefinition = "TEXT")

@@ -19,8 +19,8 @@ class UserRepositoryTest {
     @DisplayName("Auditing 기능 적용")
     void findUser() {
         User user = User.builder()
-                .nickname("test1")
-                .twitter_id("test111")
+                .nickname("test2")
+                .twitter_id("test222")
                 .build();
 
         User savedUser = userRepository.save(user);
