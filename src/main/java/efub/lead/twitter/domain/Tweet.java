@@ -10,24 +10,22 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Follow {
+public class Tweet extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long follow_id;
+    private Long tweet_id;
+
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String content;
 
     @ManyToOne
-    @JoinColumn(name="follower_id")
-    private User follower;
-
-    @ManyToOne
-    @JoinColumn(name="followee_id")
-    private User followee;
+    @JoinColumn(name="user_id")
+    private User user;
 
     @Builder
-    public Follow(User follower, User followee){
-        this.follower = follower;
-        this.followee = followee;
+    public Tweet(String content, User user){
+        this.content = content;
+        this.user = user;
     }
-
 
 }
