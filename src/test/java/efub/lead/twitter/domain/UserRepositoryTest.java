@@ -13,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 @Rollback(false)
 class UserRepositoryTest {
-    @Autowired UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Test
     @DisplayName("Auditing 기능 적용")
