@@ -38,7 +38,7 @@ public class UserController {
     @GetMapping("/{user_id}/follower")
     public List<FollowResponseDTO> findFollowerById(@PathVariable Long user_id) {
         List<Long> followers = followService.findFollowersById(user_id);
-        return userService.findUsersByFollowerId(followers);
+        return userService.findUsersByFollowerId(followers); 
     }
 
 }
