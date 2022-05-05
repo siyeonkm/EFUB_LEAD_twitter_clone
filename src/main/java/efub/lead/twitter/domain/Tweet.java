@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Tweet extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tweet_id;
+    private Long tweetId;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;

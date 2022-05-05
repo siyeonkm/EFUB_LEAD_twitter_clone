@@ -17,13 +17,13 @@ public class User extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Long userId;
 
     @Column(length = 100, nullable = false)
     private String nickname;
 
     @Column(length = 100, nullable = false, unique = true)
-    private String twitter_id;
+    private String twitterId;
 
     @Column(columnDefinition = "TEXT")
     private String bio;
@@ -35,9 +35,9 @@ public class User extends BaseEntity{
     private List<Tweet> tweets = new ArrayList<>();
 
     @Builder
-    public User(String nickname, String twitter_id, String bio, String image){
+    public User(String nickname, String twitterId, String bio, String image){
         this.nickname = nickname;
-        this.twitter_id = twitter_id;
+        this.twitterId = twitterId;
         this.bio = bio;
         this.image = image;
     }
