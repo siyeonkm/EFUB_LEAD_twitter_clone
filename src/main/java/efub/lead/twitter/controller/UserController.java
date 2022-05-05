@@ -3,11 +3,14 @@ package efub.lead.twitter.controller;
 import efub.lead.twitter.controller.dto.FollowResponseDTO;
 import efub.lead.twitter.controller.dto.UserRequestDTO;
 import efub.lead.twitter.controller.dto.UserResponseDTO;
+import efub.lead.twitter.domain.Follow;
+import efub.lead.twitter.domain.User;
 import efub.lead.twitter.service.FollowService;
 import efub.lead.twitter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -26,19 +29,21 @@ public class UserController {
 
     @GetMapping("/{user_id}")
     public UserResponseDTO findUserById(@PathVariable Long user_id) {
-        return userService.findUserById(user_id);
+        return userService.findUserDTOById(user_id);
     }
 
     @GetMapping("/{user_id}/followee")
     public List<FollowResponseDTO> findFolloweeById(@PathVariable Long user_id) {
-        List<Long> followees = followService.findFolloweesById(user_id);
+        User me = userService.findUserById(user_id);
+        List<User> followees = followService.findFolloweesById(me);
         return userService.findUsersByFolloweeId(followees);
     }
 
     @GetMapping("/{user_id}/follower")
     public List<FollowResponseDTO> findFollowerById(@PathVariable Long user_id) {
-        List<Long> followers = followService.findFollowersById(user_id);
-        return userService.findUsersByFollowerId(followers); 
+        User me = userService.findUserById(user_id);
+        List<User> followers = followService.findFollowersById(me);
+        return userService.findUsersByFollowerId(followers);
     }
 
 }

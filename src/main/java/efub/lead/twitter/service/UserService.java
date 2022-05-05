@@ -32,27 +32,31 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDTO findUserById(Long id) {
+    public UserResponseDTO findUserDTOById(Long id) {
         User user = userRepository.findUserByUserId(id);
         return buildUserDTO(user);
     }
 
     @Transactional
-    public List<FollowResponseDTO> findUsersByFolloweeId(List<Long> followees) {
+    public User findUserById(Long id) {
+        User user = userRepository.findUserByUserId(id);
+        return user;
+    }
+
+    @Transactional
+    public List<FollowResponseDTO> findUsersByFolloweeId(List<User> followees) {
         List<FollowResponseDTO> followeeList = new ArrayList<>();
-        for(Long id : followees) {
-            UserResponseDTO user = findUserById(id);
-            followeeList.add(buildFollowDTO(user));
+        for(User followee : followees) {
+            followeeList.add(buildFollowDTO(followee));
         }
         return followeeList;
     }
 
     @Transactional
-    public List<FollowResponseDTO> findUsersByFollowerId(List<Long> followers) {
+    public List<FollowResponseDTO> findUsersByFollowerId(List<User> followers) {
         List<FollowResponseDTO> followerList = new ArrayList<>();
-        for(Long id : followers) {
-            UserResponseDTO user = findUserById(id);
-            followerList.add(buildFollowDTO(user));
+        for(User follower : followers) {
+            followerList.add(buildFollowDTO(follower));
         }
         return followerList;
     }
@@ -61,7 +65,7 @@ public class UserService {
         return new UserResponseDTO(user);
     }
 
-    public FollowResponseDTO buildFollowDTO(UserResponseDTO user) {
+    public FollowResponseDTO buildFollowDTO(User user) {
         return new FollowResponseDTO(user);
     }
 

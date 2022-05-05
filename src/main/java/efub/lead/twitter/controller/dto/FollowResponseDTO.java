@@ -11,7 +11,7 @@ public class FollowResponseDTO {
     private String nickname;
     private String twitterId;
 
-    public FollowResponseDTO(UserResponseDTO entity) {
+    public FollowResponseDTO(User entity) {
         this.nickname = entity.getNickname();
         this.twitterId = entity.getTwitterId();
     }
