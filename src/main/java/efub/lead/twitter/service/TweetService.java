@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -78,8 +79,12 @@ public class TweetService {
     }
 
     @Transactional
-    public void deleteTweet(Long tweetId){
-        tweetRepository.deleteById(tweetId);
+    public void deleteTweet(Long tweetId, Long userId){
+        User user = tweetRepository.findById(tweetId).get().getUser();
+        if (Objects.equals(user.getUserId(), userId))
+            tweetRepository.deleteById(tweetId);
+        else
+            throw new IllegalStateException();
     }
 
     public TweetResponseDTO buildTweetDTO(Tweet tweet) {
