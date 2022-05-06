@@ -9,9 +9,7 @@ import efub.lead.twitter.domain.User;
 import efub.lead.twitter.service.FollowService;
 import efub.lead.twitter.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,16 +50,6 @@ public class UserController {
         User me = userService.findUserById(user_id);
         List<User> followers = followService.findFollowersById(me);
         return userService.findUsersByFollowerId(followers);
-    }
-
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity nullError() {
-        return ResponseEntity.ok("존재하지 않는 유저입니다");
-    }
-
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity mismatchError() {
-        return ResponseEntity.ok("올바르지 않은 유저 아이디입니다");
     }
 
 }
