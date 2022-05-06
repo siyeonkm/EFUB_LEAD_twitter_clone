@@ -20,20 +20,20 @@ public class TweetService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void saveTweet(TweetRequestDTO tweetDTO){ //게시글 저장
+    public TweetResponseDTO saveTweet(TweetRequestDTO tweetDTO){ //게시글 저장
         User user = userRepository.getById(tweetDTO.getUserId());
         Tweet tweet = Tweet.builder()
                 .user(user)
                 .content(tweetDTO.getContent())
                 .build();
-        tweetRepository.save(tweet);
+        Tweet savedTweet = tweetRepository.save(tweet);
+        return buildTweetDTO(savedTweet);
     }
 
     @Transactional
     public List<TweetResponseDTO> getTweetList(){ //게시글 전체 조회
         List<Tweet> tweetList = tweetRepository.findAll();
         List<TweetResponseDTO> tweetDTOList = new ArrayList<>();
-
         for(Tweet tweet : tweetList){
             TweetResponseDTO tweetResponseDTO = buildTweetDTO(tweet);
             tweetDTOList.add(tweetResponseDTO);
@@ -45,7 +45,7 @@ public class TweetService {
     @Transactional
     public TweetResponseDTO getTweet(Long tweetId){ //게시글 아이디로 조회
         Tweet tweet = tweetRepository.findById(tweetId).get();
-        return new TweetResponseDTO(tweet);
+        return buildTweetDTO(tweet);
     }
 
     @Transactional

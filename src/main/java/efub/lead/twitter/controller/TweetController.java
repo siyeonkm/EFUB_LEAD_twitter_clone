@@ -24,7 +24,7 @@ public class TweetController {
         return tweetService.getTweet(tweet_id);
     }
 
-    @GetMapping("/tweets/{twitter_id")
+    @GetMapping("/tweets/{twitter_id}")
     public List<TweetResponseDTO> getTweetsByTwitterId(@PathVariable String twitter_id){
         return tweetService.getTweetListByTwitterId(twitter_id);
     }
