@@ -3,6 +3,7 @@ package efub.lead.twitter.service;
 import efub.lead.twitter.controller.dto.FollowResponseDTO;
 import efub.lead.twitter.controller.dto.UserRequestDTO;
 import efub.lead.twitter.controller.dto.UserResponseDTO;
+import efub.lead.twitter.controller.dto.UserUpdateRequestDTO;
 import efub.lead.twitter.domain.User;
 import efub.lead.twitter.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,15 @@ public class UserService {
     public User findUserById(Long id) {
         User user = userRepository.findUserByUserId(id);
         return user;
+    }
+
+    public UserResponseDTO updateUserById(Long id, UserUpdateRequestDTO userDTO) {
+        User user = userRepository.findUserByUserId(id);
+        if(user != null) {
+            user.UpdateUser(userDTO.getNickname(), userDTO.getTwitterId(), userDTO.getBio());
+            userRepository.save(user);
+        }
+        return buildUserDTO(user);
     }
 
     @Transactional
