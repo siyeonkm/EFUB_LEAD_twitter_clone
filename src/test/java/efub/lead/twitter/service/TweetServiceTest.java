@@ -37,8 +37,9 @@ class TweetServiceTest {
     @DisplayName("트윗 조회 테스트")
     void getTweetTest(){
         List<TweetResponseDTO> tweetListByTwitterId = tweetService.getTweetListByTwitterId("@Efub_manager");
-        System.out.println("tweetListByTwitterId = " + tweetListByTwitterId);
+        System.out.println("TwitterId = " + tweetListByTwitterId.get(0).getTwitterId());
         assertThat(tweetListByTwitterId.size()).isEqualTo(1);
     }
+
 
 }
