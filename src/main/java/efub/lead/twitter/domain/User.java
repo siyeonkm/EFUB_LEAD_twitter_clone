@@ -42,4 +42,10 @@ public class User extends BaseEntity{
         this.image = image;
     }
 
+    public void UpdateUser(String nickname, String twitterId, String bio) {
+        if(nickname!=null && !nickname.isBlank()) this.nickname = nickname;
+        if(twitterId!=null && !twitterId.isBlank()) this.twitterId = twitterId;
+        if(bio!=null && !bio.isBlank()) this.bio = bio;
+    }
+
 }

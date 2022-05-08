@@ -3,6 +3,7 @@ package efub.lead.twitter.controller;
 import efub.lead.twitter.controller.dto.FollowResponseDTO;
 import efub.lead.twitter.controller.dto.UserRequestDTO;
 import efub.lead.twitter.controller.dto.UserResponseDTO;
+import efub.lead.twitter.controller.dto.UserUpdateRequestDTO;
 import efub.lead.twitter.domain.Follow;
 import efub.lead.twitter.domain.User;
 import efub.lead.twitter.service.FollowService;
@@ -32,6 +33,11 @@ public class UserController {
     @GetMapping("/{user_id}")
     public UserResponseDTO findUserById(@PathVariable Long user_id) {
         return userService.findUserDTOById(user_id);
+    }
+
+    @PatchMapping("/{user_id}")
+    public UserResponseDTO updateUserById(@PathVariable Long user_id, @RequestBody UserUpdateRequestDTO userUpdateDTO) {
+        return userService.updateUserById(user_id, userUpdateDTO);
     }
 
     @GetMapping("/{user_id}/followee")
