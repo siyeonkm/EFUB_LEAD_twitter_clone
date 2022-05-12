@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TweetResponseDTO {
+    private Long tweetId;
     private Long userId;
     private String content;
     private String nickname;
@@ -17,6 +18,7 @@ public class TweetResponseDTO {
     private LocalDateTime createdDate;
 
     public TweetResponseDTO(Tweet entity){
+        this.tweetId = entity.getTweetId();
         this.userId = entity.getUser().getUserId();
         this.content = entity.getContent();
         this.nickname = entity.getUser().getNickname();
